@@ -14,25 +14,25 @@ const setUpDatabase = () => {
     logging: false,
   });
 
-    const Reader = ReaderModel(connection, Sequelize);
-    const Book = BookModel(connection, Sequelize);
-    const Genre = GenreModel(connection, Sequelize);
-    const Author = AuthorModel(connection, Sequelize);
+  const Reader = ReaderModel(connection, Sequelize);
+  const Book = BookModel(connection, Sequelize);
+  const Genre = GenreModel(connection, Sequelize);
+  const Author = AuthorModel(connection, Sequelize);
 
-    Reader.hasMany(Book);
-    Genre.hasMany(Book);
-    Book.belongsTo(Genre);
-    Author.hasMany(Book);
-    Book.belongsTo(Author);
+  Reader.hasMany(Book);
+  Genre.hasMany(Book);
+  Book.belongsTo(Genre);
+  Author.hasMany(Book);
+  Book.belongsTo(Author);
 
-    connection.sync({ alter: true })
+  connection.sync({ alter: true })
 
-    return {
-        Reader,
-        Book,
-        Genre,
-        Author,
-    };
+  return {
+    Reader,
+    Book,
+    Genre,
+    Author,
+  };
 };
 
 module.exports = setUpDatabase();

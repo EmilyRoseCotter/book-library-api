@@ -10,7 +10,7 @@ describe('/genres', () => {
         await Genre.destroy({ where: {} });
     });
 
-    describe('with no recrods in the database', () => {
+    describe('with no records in the database', () => {
         describe('POST /genres', () => {
             it('creates a new genre in the database', async () => {
                 const response = await request(app).post('/genres').send({
@@ -67,9 +67,7 @@ describe('/genres', () => {
 
         describe('POST /genres', () => {
             it('should return 400 error if the genre is already in the database', async () => {
-                const genreData = genres[0].genre;
-                const response = await request(app).post('/genres').send(genreData);
-                console.log(response.body);
+                const response = await request(app).post('/genres').send(genres[0].genre);
                 expect(response.status).to.equal(400);
             });
         });
@@ -122,8 +120,8 @@ describe('/genres', () => {
 
             it('returns a 404 if the genre does not exist', async () => {
                 const response = await request(app)
-                .patch('/genres/12345')
-                .send({ genre: 'Sci-Fi'});
+                  .patch('/genres/12345')
+                  .send({ genre: 'Sci-Fi'});
 
                 expect(response.status).to.equal(404);
                 expect(response.body.error).to.equal('The genre could not be found.')
